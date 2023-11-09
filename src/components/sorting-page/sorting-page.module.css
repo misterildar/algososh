@@ -1,0 +1,30 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  column-gap: 50px;
+  width: 980px;
+  height: 60px;
+}
+
+.box_radio_button {
+  display: flex;
+  column-gap: 50px;
+  padding-top: 20px;
+}
+
+.box_button {
+  display: flex;
+  column-gap: 20px;
+}
+
+.diagram {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 10px;
+  height: 400px;
+}

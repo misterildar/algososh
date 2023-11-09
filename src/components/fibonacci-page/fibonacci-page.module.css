@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.box_input {
+  display: flex;
+  gap: 20px;
+  min-width: 560px;
+}
+
+.box_circle {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  column-gap: 15px;
+  row-gap: 50px;
+  max-width: 950px;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
