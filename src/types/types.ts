@@ -1,5 +1,5 @@
-import { ElementStates } from './element-states';
 import { Dispatch } from 'react';
+import { ElementStates } from './element-states';
 import { Stack } from '../components/stack-page/class-stack';
 
 export interface IvalueCircle {
@@ -15,22 +15,21 @@ export interface IvalueColumn {
 [];
 
 export interface IStack<T> {
-  push: (item: T) => void;
   pop: () => void;
   peak: () => T | null;
   getSize: () => number;
+  push: (item: T) => void;
 }
 
 export interface IparametersSorting {
-  setNewArray: Dispatch<React.SetStateAction<IvalueColumn[]>>;
   setUpOrderLoader: Dispatch<React.SetStateAction<boolean>>;
+  setNewArray: Dispatch<React.SetStateAction<IvalueColumn[]>>;
   setDownOrderLoader: Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IparametersStack {
   valueInput: string;
-  setValueInput: Dispatch<React.SetStateAction<string>>;
   stack: Stack<IvalueCircle>;
-  setStack: Dispatch<React.SetStateAction<Stack<IvalueCircle>>>;
+  setValueInput: Dispatch<React.SetStateAction<string>>;
   setStackContainer: Dispatch<React.SetStateAction<IvalueCircle[]>>;
 }

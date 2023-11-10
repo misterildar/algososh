@@ -1,17 +1,16 @@
-import React, { ChangeEvent } from 'react';
+import { useState } from 'react';
+import { Stack } from './class-stack';
 import { Input } from '../ui/input/input';
+import React, { ChangeEvent } from 'react';
 import { Button } from '../ui/button/button';
 import styles from './stack-page.module.css';
 import { Circle } from '../ui/circle/circle';
-import { useState } from 'react';
-import { Stack } from './class-stack';
 import { IvalueCircle } from '../../types/types';
-import { ElementStates } from '../../types/element-states';
-import { addElement, deletElement, clearElements } from './logic-stack';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
+import { addElement, deleteElement, clearElements } from './logic-stack';
 
 export const StackPage: React.FC = () => {
-  const [stack, setStack] = useState(new Stack<IvalueCircle>());
+  const [stack] = useState(new Stack<IvalueCircle>());
 
   const [valueInput, setValueInput] = useState('');
 
@@ -19,7 +18,6 @@ export const StackPage: React.FC = () => {
 
   const parameters = {
     stack,
-    setStack,
     valueInput,
     setValueInput,
     setStackContainer,
@@ -29,12 +27,22 @@ export const StackPage: React.FC = () => {
     addElement(parameters);
   };
 
-  const deletElementStack = () => {};
+  const deleteElementStack = () => {
+    deleteElement(parameters);
+  };
 
-  const clearStack = () => {};
+  const clearStack = () => {
+    clearElements(parameters);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValueInput(event.target.value.trim());
+  };
+
+  const stackLength = stackContainer.length;
+
+  const tailElement = (index: number) => {
+    return index === stackLength - 1 ? 'top' : '';
   };
 
   return (
@@ -56,15 +64,15 @@ export const StackPage: React.FC = () => {
           />
           <Button
             text='Удалить'
-            onClick={deletElementStack}
-            // disabled={disabledButton}
+            onClick={deleteElementStack}
+            disabled={!!!stackLength}
           />
         </div>
         <div>
           <Button
             text='Очистить'
             onClick={clearStack}
-            // disabled={disabledButton}
+            disabled={!!!stackLength}
           />
         </div>
       </div>
@@ -75,6 +83,7 @@ export const StackPage: React.FC = () => {
             key={index}
             index={index}
             state={el.color}
+            head={tailElement(index)}
           />
         ))}
       </div>

@@ -1,7 +1,7 @@
 import { IStack } from '../../types/types';
 
 export class Stack<T> implements IStack<T> {
-  private container: T[] = [];
+  container: T[] = [];
 
   push = (item: T): void => {
     this.container.push(item);
@@ -19,7 +19,9 @@ export class Stack<T> implements IStack<T> {
     }
   };
 
-  getSize = () => this.container.length;
-
   getStack = () => this.container;
+
+  clear = () => (this.container = []);
+
+  getSize = () => this.container.length;
 }
