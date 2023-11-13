@@ -3,14 +3,14 @@ import { IparametersSorting } from '../../types/types';
 import { IvalueColumn } from '../../types/types';
 import { ElementStates } from '../../types/element-states';
 
-const getRandomInt = (min = 3, max = 17) => {
+export const getRandomInt = (min = 3, max = 17) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const generateArray = (minLengthFunc: number, maxLength = 100) =>
-  [...new Array(minLengthFunc)].map(() =>
+const generateArray = (minLengthNumber: number, maxLength = 100) =>
+  [...new Array(minLengthNumber)].map(() =>
     Math.round(Math.random() * maxLength)
   );
 
