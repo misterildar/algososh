@@ -6,10 +6,10 @@ import styles from './quene-page.module.css';
 import { Circle } from '../ui/circle/circle';
 import { IvalueCircle } from '../../types/types';
 import {
-  addElement,
-  deleteElement,
   emptyArray,
+  addElement,
   clearElement,
+  deleteElement,
 } from './logic-queue';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 

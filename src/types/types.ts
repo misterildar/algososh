@@ -2,11 +2,12 @@ import { Dispatch } from 'react';
 import { ElementStates } from './element-states';
 import { Stack } from '../components/stack-page/class-stack';
 import { Queue } from '../components/queue-page/class-queue';
+import { LinkedList } from '../components/list-page/class-list-page';
 
 export interface IvalueCircle {
   value: string;
-  color: ElementStates;
   head?: string;
+  color: ElementStates;
 }
 
 export interface IvalueColumn {
@@ -19,6 +20,47 @@ export interface IStack<T> {
   peak: () => T | null;
   getSize: () => number;
   push: (item: T) => void;
+}
+
+export interface IQueue<T> {
+  clear: () => void;
+  dequeue: () => void;
+  getHead: () => number;
+  getTail: () => number;
+  enqueue: (item: T) => void;
+  getHeadIndex: () => number;
+}
+
+export interface Iinput {
+  index?: number;
+  value?: string;
+}
+
+export interface IListContainer {
+  value: string;
+  color: ElementStates;
+  showAddCircle: boolean;
+  showDeleteCircle: boolean;
+  colorSmall: ElementStates;
+  valueSmall: string;
+}
+
+export interface IsetIsLoader {
+  addHead: boolean;
+  addTail: boolean;
+  deleteHead: boolean;
+  deleteTail: boolean;
+  addByIndex: boolean;
+  deleteByIndex: boolean;
+}
+
+export interface IElement {
+  value: string;
+  valueSmall: string;
+  color: ElementStates;
+  showAddCircle: boolean;
+  showDeleteCircle: boolean;
+  colorSmall: ElementStates;
 }
 
 export interface IparametersSorting {
@@ -35,28 +77,23 @@ export interface IparametersStack {
 }
 
 export interface IparametersQueune {
-  queue: Queue<IvalueCircle>;
   valueInput: string;
+  queue: Queue<IvalueCircle>;
   queueContainer: IvalueCircle[];
   setValueInput: Dispatch<React.SetStateAction<string>>;
   setQueueContainer: Dispatch<React.SetStateAction<IvalueCircle[]>>;
 }
 
-export interface IQueue<T> {
-  enqueue: (item: T) => void;
-  dequeue: () => void;
-  getHead: () => number;
-  getTail: () => number;
-  getHeadIndex: () => number;
-  clear: () => void;
-}
-
-export interface IstarterArray {
-  value: string;
-  color: ElementStates;
-}
-
-export interface Iinput {
-  index: number;
-  value: string;
+export interface IList {
+  valueInput: string;
+  valueIndex: string;
+  listLength: number;
+  element: IElement;
+  isLoader: IsetIsLoader;
+  listContainer: IListContainer[];
+  list: LinkedList<IListContainer>;
+  setValueIndex: Dispatch<React.SetStateAction<string>>;
+  setValueInput: Dispatch<React.SetStateAction<string>>;
+  setIsLoader: Dispatch<React.SetStateAction<IsetIsLoader>>;
+  setListContainer: Dispatch<React.SetStateAction<IListContainer[]>>;
 }

@@ -1,6 +1,6 @@
 import { delay } from '../../utils/delay';
-import { IparametersSorting } from '../../types/types';
 import { IvalueColumn } from '../../types/types';
+import { IparametersSorting } from '../../types/types';
 import { ElementStates } from '../../types/element-states';
 
 export const getRandomInt = (min = 3, max = 17) => {
@@ -19,8 +19,8 @@ export const getRandomArray = () => {
   return generateArray(randomNumber);
 };
 
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
+////////////////////////////////////
+////////////////////////////////////
 
 export const selectionSort = async (
   minMax: string,
@@ -64,8 +64,8 @@ export const selectionSort = async (
   minMax === 'max' ? setDownOrderLoader(false) : setUpOrderLoader(false);
 };
 
-//////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
+/////////////////////////////////
+/////////////////////////////////
 
 export const bubbleSort = async (
   minMax: string,

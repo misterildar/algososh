@@ -1,15 +1,15 @@
-import styles from './sorting-page.module.css';
-import { SolutionLayout } from '../ui/solution-layout/solution-layout';
-import { RadioInput } from '../ui/radio-input/radio-input';
-import { Direction } from '../../types/direction';
-import { Button } from '../ui/button/button';
-import { getRandomArray } from './logic-sorting';
 import React, { useState } from 'react';
+import { Button } from '../ui/button/button';
+import { bubbleSort } from './logic-sorting';
 import { Column } from '../ui/column/column';
+import styles from './sorting-page.module.css';
+import { Direction } from '../../types/direction';
+import { getRandomArray } from './logic-sorting';
 import { selectionSort } from './logic-sorting';
 import { IvalueColumn } from '../../types/types';
 import { ElementStates } from '../../types/element-states';
-import { bubbleSort } from './logic-sorting';
+import { RadioInput } from '../ui/radio-input/radio-input';
+import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 
 export const SortingPage: React.FC = () => {
   const [newArray, setNewArray] = useState<IvalueColumn[]>([]);

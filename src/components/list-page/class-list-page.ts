@@ -1,5 +1,3 @@
-import { ElementStates } from '../../types/element-states';
-
 export class Node<T> {
   value: T;
   next: Node<T> | null;
@@ -23,6 +21,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   private head: Node<T> | null;
   private tail: Node<T> | null;
   private length: number;
+
   constructor() {
     this.head = null;
     this.tail = null;
@@ -54,8 +53,8 @@ export class LinkedList<T> implements ILinkedList<T> {
   }
 
   toArray() {
-    let currentNode = this.head;
     const nodes = [];
+    let currentNode = this.head;
     while (currentNode) {
       nodes.push(currentNode);
       currentNode = currentNode.next;
@@ -122,15 +121,37 @@ export class LinkedList<T> implements ILinkedList<T> {
     if (index < 0 || index > this.length) {
       console.log('index not found');
     }
-    if (!this.head || index === 0) {
+
+    if (index === 0) {
       return this.deleteHead();
-    } else {
-      let prev = this.head;
-      while (index - 1 && prev.next && prev.next.next) {
-        prev = prev.next;
+    }
+
+    if (index === this.length - 1) {
+      return this.deleteTail();
+    }
+
+    let deleteNode = null;
+
+    let prev = null;
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      if (current) {
+        prev = current;
+        current = current.next;
       }
-      prev.next = prev.next!.next;
+    }
+    deleteNode = current;
+    if (prev && current) {
+      prev.next = current.next;
     }
     this.length--;
+
+    return deleteNode;
   }
+
+  isEmpty = () => this.length === 0;
+
+  getHead = () => this.head;
+
+  getTail = () => this.length - 1;
 }

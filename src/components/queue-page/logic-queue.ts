@@ -25,6 +25,7 @@ export const addElement = async (parameters: IparametersQueune) => {
     value: '',
     color: ElementStates.Changing,
   };
+  setValueInput('');
   setQueueContainer([...queueContainer]);
   await delay(300);
   queueContainer[queue.getTail()] = {
@@ -38,10 +39,9 @@ export const addElement = async (parameters: IparametersQueune) => {
     color: ElementStates.Default,
   };
   setQueueContainer([...queueContainer]);
-  setValueInput('');
 };
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 export const deleteElement = async (parameters: IparametersQueune) => {
   const { queue, queueContainer, setQueueContainer } = parameters;
@@ -69,12 +69,11 @@ export const deleteElement = async (parameters: IparametersQueune) => {
   setQueueContainer([...queueContainer]);
 };
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 export const clearElement = (parameters: IparametersQueune) => {
   const { queue, setQueueContainer } = parameters;
-
   queue.clear();
   setQueueContainer(
     Array.from({ length: 7 }, () => ({
