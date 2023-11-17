@@ -5,6 +5,7 @@ import { Button } from '../ui/button/button';
 import styles from './quene-page.module.css';
 import { Circle } from '../ui/circle/circle';
 import { IvalueCircle } from '../../types/types';
+import { MAX_LENGHT } from '../../constants/constans';
 import {
   emptyArray,
   addElement,
@@ -21,6 +22,12 @@ export const QueuePage: React.FC = () => {
   const [queueContainer, setQueueContainer] =
     useState<IvalueCircle[]>(emptyArray);
 
+  const [isDisabled, setIsDisabled] = useState({
+    addButton: false,
+    deleteButton: false,
+    clearButton: false,
+  });
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValueInput(event.target.value.trim());
   };
@@ -28,8 +35,10 @@ export const QueuePage: React.FC = () => {
   const parameters = {
     queue,
     valueInput,
+    isDisabled,
     queueContainer,
     setValueInput,
+    setIsDisabled,
     setQueueContainer,
   };
 
@@ -53,28 +62,38 @@ export const QueuePage: React.FC = () => {
         <div className={styles.box_input}>
           <Input
             type='text'
-            maxLength={4}
+            maxLength={MAX_LENGHT}
             isLimitText={true}
             value={valueInput}
             onChange={handleChange}
             placeholder='Введите текст'
+            disabled={
+              isDisabled.addButton ||
+              isDisabled.clearButton ||
+              isDisabled.deleteButton
+            }
           />
           <Button
             text='Добавить'
             onClick={addElementQueue}
+            isLoader={isDisabled.deleteButton && isDisabled.clearButton}
             disabled={!!!valueInput || queue.isFull()}
           />
           <Button
             text='Удалить'
             onClick={deleteElementQueue}
-            disabled={queue.isEmpty()}
+            isLoader={isDisabled.addButton && isDisabled.clearButton}
+            disabled={queue.isEmpty() || isDisabled.deleteButton}
           />
         </div>
         <div>
           <Button
             text='Очистить'
             onClick={clearQueue}
-            disabled={queue.isEmpty()}
+            isLoader={isDisabled.addButton && isDisabled.deleteButton}
+            disabled={
+              isDisabled.addButton || isDisabled.deleteButton || queue.isEmpty()
+            }
           />
         </div>
       </div>

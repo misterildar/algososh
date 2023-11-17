@@ -38,7 +38,7 @@ export const SortingPage: React.FC = () => {
     setDownOrderLoader,
   };
 
-  const selection = (text: string = 'min') => {
+  const selection = (text = 'min') => {
     checked
       ? selectionSort(text, newArray, parameter)
       : bubbleSort(text, newArray, parameter);

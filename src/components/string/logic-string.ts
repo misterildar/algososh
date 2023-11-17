@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { delay } from '../../utils/delay';
 import { IvalueCircle } from '../../types/types';
 import { ElementStates } from '../../types/element-states';
+import { SHORT_DELAY_IN_MS, DELAY_IN_MS } from '../../constants/delays';
 
 export const reverseString = async (
   valueInput: string,
@@ -15,7 +16,7 @@ export const reverseString = async (
     .map((value) => ({ value, color: ElementStates.Default }));
 
   setValueCircle(arrayString);
-  await delay(600);
+  await delay(SHORT_DELAY_IN_MS);
 
   let start = 0;
   let end = arrayString.length - 1;
@@ -32,7 +33,7 @@ export const reverseString = async (
     arrayString[start].color = ElementStates.Modified;
     arrayString[end].color = ElementStates.Modified;
 
-    await delay(1000);
+    await delay(DELAY_IN_MS);
     start++;
     end--;
   }

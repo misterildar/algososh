@@ -6,6 +6,7 @@ import { Button } from '../ui/button/button';
 import styles from './stack-page.module.css';
 import { Circle } from '../ui/circle/circle';
 import { IvalueCircle } from '../../types/types';
+import { MAX_LENGHT } from '../../constants/constans';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import { addElement, deleteElement, clearElements } from './logic-stack';
 
@@ -16,10 +17,18 @@ export const StackPage: React.FC = () => {
 
   const [stackContainer, setStackContainer] = useState<IvalueCircle[]>([]);
 
+  const [isDisabled, setIsDisabled] = useState({
+    addButton: false,
+    deleteButton: false,
+    clearButton: false,
+  });
+
   const parameters = {
     stack,
     valueInput,
+    isDisabled,
     setValueInput,
+    setIsDisabled,
     setStackContainer,
   };
 
@@ -51,28 +60,42 @@ export const StackPage: React.FC = () => {
         <div className={styles.box_input}>
           <Input
             type='text'
-            maxLength={4}
+            maxLength={MAX_LENGHT}
             isLimitText={true}
             value={valueInput}
             onChange={handleChange}
             placeholder='Введите текст'
+            disabled={
+              isDisabled.addButton ||
+              isDisabled.clearButton ||
+              isDisabled.deleteButton
+            }
           />
           <Button
             text='Добавить'
             onClick={addElementStack}
-            disabled={!!!valueInput}
+            disabled={
+              !!!valueInput || isDisabled.deleteButton || isDisabled.clearButton
+            }
+            isLoader={isDisabled.addButton}
           />
           <Button
             text='Удалить'
             onClick={deleteElementStack}
-            disabled={!!!stackLength}
+            disabled={
+              !!!stackLength || isDisabled.addButton || isDisabled.clearButton
+            }
+            isLoader={isDisabled.deleteButton}
           />
         </div>
         <div>
           <Button
             text='Очистить'
             onClick={clearStack}
-            disabled={!!!stackLength}
+            disabled={
+              !!!stackLength || isDisabled.addButton || isDisabled.deleteButton
+            }
+            isLoader={isDisabled.clearButton}
           />
         </div>
       </div>

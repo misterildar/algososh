@@ -5,6 +5,7 @@ import { Circle } from '../ui/circle/circle';
 import { LinkedList } from './class-list-page';
 import { IListContainer } from '../../types/types';
 import { ArrowIcon } from '../ui/icons/arrow-icon';
+import { MAX_LENGHT } from '../../constants/constans';
 import { ElementStates } from '../../types/element-states';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 import React, { ChangeEvent, useEffect, useState, useMemo } from 'react';
@@ -104,9 +105,9 @@ export const ListPage: React.FC = () => {
     deleteByIndexList(parameters);
   };
 
-  const isEmpty = list.isEmpty();
-
   const isArrow = listContainer.length - 1;
+
+  const isEmpty = list.isEmpty();
 
   const isDisabletInput = function () {
     return (
@@ -123,8 +124,30 @@ export const ListPage: React.FC = () => {
     return !!!valueInput || !!valueIndex;
   };
 
-  const deleHeadTail = function () {
-    return isEmpty || !!valueInput || !!valueIndex;
+  const disabledDeleteHead = () => {
+    return (
+      isLoader.addTail ||
+      isLoader.addHead ||
+      isLoader.deleteTail ||
+      isLoader.addByIndex ||
+      isLoader.deleteByIndex ||
+      !!valueIndex ||
+      !!valueInput ||
+      isEmpty
+    );
+  };
+
+  const disabledDeleteTail = () => {
+    return (
+      isLoader.addTail ||
+      isLoader.addHead ||
+      isLoader.deleteHead ||
+      isLoader.addByIndex ||
+      isLoader.deleteByIndex ||
+      !!valueIndex ||
+      !!valueInput ||
+      isEmpty
+    );
   };
 
   const isFill = (el: IListContainer) => {
@@ -145,11 +168,11 @@ export const ListPage: React.FC = () => {
         <div className={styles.box}>
           <Input
             type='text'
-            maxLength={4}
+            maxLength={MAX_LENGHT}
             isLimitText={true}
             value={valueInput}
             onChange={handleChange}
-            disabled={isDisabletInput()}
+            disabled={isDisabletInput() || isEmpty}
             placeholder='Введите значение'
           />
           <Button
@@ -168,14 +191,14 @@ export const ListPage: React.FC = () => {
           />
           <Button
             text='Удалить из head'
-            disabled={deleHeadTail()}
+            disabled={disabledDeleteHead()}
             isLoader={isLoader.deleteHead}
             onClick={() => deleteElement(0)}
             style={{ minWidth: '180px' }}
           />
           <Button
             text='Удалить из tail'
-            disabled={deleHeadTail()}
+            disabled={disabledDeleteTail()}
             isLoader={isLoader.deleteTail}
             onClick={() => deleteElement(listLength - 1)}
             style={{ minWidth: '180px' }}
@@ -186,19 +209,23 @@ export const ListPage: React.FC = () => {
             type='number'
             value={valueIndex}
             onChange={handleChangeInput}
-            disabled={isDisabletInput()}
+            disabled={isDisabletInput() || isEmpty}
             placeholder='Введите индекс'
           />
           <Button
             text='Добавить по индексу'
-            disabled={!!!valueInput || !!!valueIndex}
+            disabled={
+              !!!valueInput || !!!valueIndex || Number(valueIndex) > isArrow
+            }
             isLoader={isLoader.addByIndex}
             onClick={addByIndex}
             style={{ minWidth: '370px' }}
           />
           <Button
             text='Удалить по индексу'
-            disabled={!!!valueIndex}
+            disabled={
+              !!!valueIndex || !!valueInput || Number(valueIndex) > isArrow
+            }
             isLoader={isLoader.deleteByIndex}
             onClick={deleteByIndex}
             style={{ minWidth: '370px' }}

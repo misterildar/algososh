@@ -6,6 +6,7 @@ import { Button } from '../ui/button/button';
 import { Circle } from '../ui/circle/circle';
 import { reverseString } from './logic-string';
 import { IvalueCircle } from '../../types/types';
+import { STRING_MAX_LENGTH } from '../../constants/constans';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 
 export const StringComponent: React.FC = () => {
@@ -29,7 +30,7 @@ export const StringComponent: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.box_input}>
           <Input
-            maxLength={11}
+            maxLength={STRING_MAX_LENGTH}
             isLimitText={true}
             onChange={handleChange}
             value={valueInput}

@@ -63,6 +63,12 @@ export interface IElement {
   colorSmall: ElementStates;
 }
 
+interface IStackIsDisabled {
+  addButton: boolean;
+  deleteButton: boolean;
+  clearButton: boolean;
+}
+
 export interface IparametersSorting {
   setUpOrderLoader: Dispatch<React.SetStateAction<boolean>>;
   setNewArray: Dispatch<React.SetStateAction<IvalueColumn[]>>;
@@ -72,15 +78,19 @@ export interface IparametersSorting {
 export interface IparametersStack {
   valueInput: string;
   stack: Stack<IvalueCircle>;
+  isDisabled: IStackIsDisabled;
   setValueInput: Dispatch<React.SetStateAction<string>>;
+  setIsDisabled: Dispatch<React.SetStateAction<IStackIsDisabled>>;
   setStackContainer: Dispatch<React.SetStateAction<IvalueCircle[]>>;
 }
 
 export interface IparametersQueune {
   valueInput: string;
+  isDisabled: IStackIsDisabled;
   queue: Queue<IvalueCircle>;
   queueContainer: IvalueCircle[];
   setValueInput: Dispatch<React.SetStateAction<string>>;
+  setIsDisabled: Dispatch<React.SetStateAction<IStackIsDisabled>>;
   setQueueContainer: Dispatch<React.SetStateAction<IvalueCircle[]>>;
 }
 

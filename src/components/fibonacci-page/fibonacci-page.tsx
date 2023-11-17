@@ -3,8 +3,10 @@ import { Input } from '../ui/input/input';
 import React, { ChangeEvent } from 'react';
 import { Circle } from '../ui/circle/circle';
 import { Button } from '../ui/button/button';
+import { getFibonacciNumbers } from './utils';
 import styles from './fibonacci-page.module.css';
-import { fibonacciNumber } from './logic-fibonacci';
+import { showFibonacciNimber } from './logic-fibonacci';
+import { MAX_LENGHT_FIBONACCI } from '../../constants/constans';
 import { SolutionLayout } from '../ui/solution-layout/solution-layout';
 
 export const FibonacciPage: React.FC = () => {
@@ -12,22 +14,23 @@ export const FibonacciPage: React.FC = () => {
 
   const [disabledButton, setDisabledButton] = useState(true);
 
-  const [valueInput, setValueInput] = useState<number | string>('');
+  const [valueInput, setValueInput] = useState<string>('');
 
   const [valueCircle, setValueCircle] = useState<number[]>([]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let num = Number(event.target.value);
-    setValueInput(num);
+    setValueInput(event.target.value);
+    const num = Number(event.target.value);
     setDisabledButton(false);
-    if (num <= 0 || num > 19) {
+    if (num <= 0 || num > MAX_LENGHT_FIBONACCI) {
       setDisabledButton(true);
     }
   };
 
+  const array = getFibonacciNumbers(valueInput);
+
   const onClick = () => {
-    fibonacciNumber(valueInput as number, setValueCircle, setLoader);
-    setValueInput('');
+    showFibonacciNimber(array, setValueInput, setValueCircle, setLoader);
   };
 
   return (
@@ -35,7 +38,7 @@ export const FibonacciPage: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.box_input}>
           <Input
-            max={19}
+            max={MAX_LENGHT_FIBONACCI}
             type='number'
             isLimitText={true}
             value={valueInput}

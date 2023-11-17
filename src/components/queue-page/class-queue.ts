@@ -1,4 +1,5 @@
 import { IQueue } from '../../types/types';
+import { CLASS_QUENE_MAX,CLASS_QUENE_MIN } from '../../constants/constans';
 
 export class Queue<T> implements IQueue<T> {
   private container: T[] = [];
@@ -43,7 +44,7 @@ export class Queue<T> implements IQueue<T> {
   };
 
   end = () => {
-    return this.getHead() === 7 && this.getTail() === 6 && this.isEmpty();
+    return this.getHead() === CLASS_QUENE_MAX && this.getTail() === CLASS_QUENE_MIN && this.isEmpty();
   };
 
   clear = () => {
