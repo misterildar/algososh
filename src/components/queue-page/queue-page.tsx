@@ -75,12 +75,14 @@ export const QueuePage: React.FC = () => {
           />
           <Button
             text='Добавить'
+            data-cy='queue-add'
             onClick={addElementQueue}
             isLoader={isDisabled.deleteButton && isDisabled.clearButton}
             disabled={!!!valueInput || queue.isFull()}
           />
           <Button
             text='Удалить'
+            data-cy='queue-delete'
             onClick={deleteElementQueue}
             isLoader={isDisabled.addButton && isDisabled.clearButton}
             disabled={queue.isEmpty() || isDisabled.deleteButton}
@@ -89,6 +91,7 @@ export const QueuePage: React.FC = () => {
         <div>
           <Button
             text='Очистить'
+            data-cy='queue-clear'
             onClick={clearQueue}
             isLoader={isDisabled.addButton && isDisabled.deleteButton}
             disabled={

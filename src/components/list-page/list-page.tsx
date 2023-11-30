@@ -49,7 +49,7 @@ export const ListPage: React.FC = () => {
   };
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setValueIndex(event.target.value.trim());
+    setValueIndex(event.target.value.replace(/\D/g, ''));
   };
 
   const getListElements = () => {
@@ -207,6 +207,7 @@ export const ListPage: React.FC = () => {
         <div className={styles.box}>
           <Input
             type='number'
+            pattern='^[0-9]'
             value={valueIndex}
             onChange={handleChangeInput}
             disabled={isDisabletInput() || isEmpty}
