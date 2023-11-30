@@ -73,6 +73,7 @@ export const StackPage: React.FC = () => {
           />
           <Button
             text='Добавить'
+            data-cy='stack-add'
             onClick={addElementStack}
             disabled={
               !!!valueInput || isDisabled.deleteButton || isDisabled.clearButton
@@ -81,6 +82,7 @@ export const StackPage: React.FC = () => {
           />
           <Button
             text='Удалить'
+            data-cy='stack-delete'
             onClick={deleteElementStack}
             disabled={
               !!!stackLength || isDisabled.addButton || isDisabled.clearButton
@@ -91,6 +93,7 @@ export const StackPage: React.FC = () => {
         <div>
           <Button
             text='Очистить'
+            data-cy='stack-clear'
             onClick={clearStack}
             disabled={
               !!!stackLength || isDisabled.addButton || isDisabled.deleteButton

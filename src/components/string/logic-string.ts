@@ -37,6 +37,7 @@ export const reverseString = async (
     start++;
     end--;
   }
+  setValueCircle([...arrayString]);
   setLoader(false);
   return arrayString;
 };

@@ -29,24 +29,27 @@ export const addElement = async (parameters: IparametersQueune) => {
     value: valueInput,
     color: ElementStates.Changing,
   });
-  queueContainer[queue.getTail()] = {
+  let queueArray = queueContainer;
+  queueArray[queue.getTail()] = {
     value: '',
     color: ElementStates.Changing,
   };
   setValueInput('');
-  setQueueContainer([...queueContainer]);
+  setQueueContainer([...queueArray]);
   await delay(SHORT_DELAY_IN_MS);
-  queueContainer[queue.getTail()] = {
+  queueArray = queueContainer;
+  queueArray[queue.getTail()] = {
     value: valueInput,
     color: ElementStates.Changing,
   };
-  setQueueContainer([...queueContainer]);
+  setQueueContainer([...queueArray]);
   await delay(SHORT_DELAY_IN_MS);
-  queueContainer[queue.getTail()] = {
+  queueArray = queueContainer;
+  queueArray[queue.getTail()] = {
     value: valueInput,
     color: ElementStates.Default,
   };
-  setQueueContainer([...queueContainer]);
+  setQueueContainer([...queueArray]);
   setIsDisabled({ ...isDisabled, deleteButton: false, clearButton: false });
 };
 ////////////////////////////////////////////////////////////////////
@@ -63,26 +66,28 @@ export const deleteElement = async (parameters: IparametersQueune) => {
 
   setIsDisabled({ ...isDisabled, addButton: true, clearButton: true });
   queue.dequeue();
-  queueContainer[queue.getHead()] = {
+  let queueArray = queueContainer;
+  queueArray[queue.getHead()] = {
     value: queueContainer[queue.getHead()].value,
     color: ElementStates.Changing,
   };
-  setQueueContainer([...queueContainer]);
+  setQueueContainer([...queueArray]);
 
   await delay(SHORT_DELAY_IN_MS);
-  queueContainer[queue.getHead()] = {
+  queueArray = queueContainer;
+  queueArray[queue.getHead()] = {
     value: '',
     color: ElementStates.Default,
   };
 
   if (queue.end()) {
-    queueContainer[queue.getHead()] = {
+    queueArray[queue.getHead()] = {
       value: '',
       color: ElementStates.Default,
       head: 'head',
     };
   }
-  setQueueContainer([...queueContainer]);
+  setQueueContainer([...queueArray]);
   setIsDisabled({ ...isDisabled, addButton: false, clearButton: false });
 };
 
